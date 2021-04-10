@@ -155,7 +155,8 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Songster data ')
 
-    parser.add_argument('--genre', dest='genre', type=str, default=None,
+    parser.add_argument('--genre', dest='genre', type=str,
+                        default=None,
                         help='download music from the passed genre')
     parser.add_argument('--artist', dest='artist', type=str, default=None,
                         help='download music from the passed artist')
