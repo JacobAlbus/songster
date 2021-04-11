@@ -74,7 +74,3 @@ class TextGenerator:
             word2 = new_word
 
         return story
-
-
-temp = TextGenerator("../data/Taylor_Swift_lyrics.txt")
-print(temp.generate_text())

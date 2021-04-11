@@ -4,6 +4,7 @@ import json
 import argparse
 from pathlib import Path
 import os
+import csv
 
 # Constants
 DATA_DIR = Path('../data/')
@@ -119,7 +120,7 @@ def write_dict_to_file(artist_name, lyric_dict):
         formatted_artist_name += name + "_"
 
     file_name = formatted_artist_name + "lyrics.txt"
-    file_path = str(Path().resolve().parent) + "/data/"
+    file_path = os.getcwd() + "/data/"
 
     if not os.path.exists(file_path):
         os.makedirs(file_path)
@@ -127,6 +128,32 @@ def write_dict_to_file(artist_name, lyric_dict):
     data = str(lyric_dict)
     file_writer = open(file_path + file_name, 'w+', encoding="utf-8", errors="ignore")
     file_writer.write(data)
+
+
+def write_dict_to_csv(artist_name, lyric_dict):
+    """ Writes passed dictionary to a csv in the data folder, creates data
+    folder if it doesn't already exist
+
+    Args:
+        artist_name (str): name of the artist or genre
+        lyric_dict (dict): dictionary with song name as keys and lyrics as value
+    """
+
+    formatted_artist_name = ""
+    for name in artist_name.split(" "):
+        formatted_artist_name += name + "_"
+
+    file_name = formatted_artist_name + "lyrics.csv"
+    file_path = str(Path().resolve().parent) + "/data/"
+
+    if not os.path.exists(file_path):
+        os.makedirs(file_path)
+
+    file = open(file_path + file_name, 'w+', encoding="utf-8", errors="ignore")
+    writer = csv.writer(file)
+    for key, value in lyric_dict.items():
+        writer.writerow([key, value])
+    file.close()
 
 
 def main(args):
